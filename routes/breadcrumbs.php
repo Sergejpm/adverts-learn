@@ -23,3 +23,15 @@ Breadcrumbs::register('cabinet', function (Crumbs $crumbs) {
     $crumbs->parent('home');
     $crumbs->push('Cabinet', route('cabinet'));
 });
+Breadcrumbs::register('verification.notice', function (Crumbs $crumbs) {
+    $crumbs->parent('home');
+    $crumbs->push('Verify', route('verification.notice'));
+});
+Breadcrumbs::register('verification.verify', function (Crumbs $crumbs, $id) {
+    $crumbs->parent('home');
+    $crumbs->push('Verify', route('verification.verify'));
+});
+Breadcrumbs::register('verification.resend', function (Crumbs $crumbs) {
+    $crumbs->parent('home');
+    $crumbs->push('Verify', route('verification.resend'));
+});
