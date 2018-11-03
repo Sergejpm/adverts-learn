@@ -19,3 +19,15 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes(['verify' => true]);
 
 Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet')->middleware('verified');
+
+Route::group(
+    [
+        'prefix' => 'admin',
+        'as' => 'admin.',
+        'namespace' => 'Admin',
+        'middleware' => ['auth'],
+    ],
+    function () {
+        Route::get('/', 'HomeController@index')->name('home');
+    }
+);
