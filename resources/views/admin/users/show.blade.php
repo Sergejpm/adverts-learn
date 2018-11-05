@@ -26,6 +26,16 @@
         <tr>
             <th>Verified</th><td>{{ $user->email_verified_at }}</td>
         </tr>
+        <tr>
+            <th>Role</th>
+            <td>
+                @if ($user->isAdmin())
+                    <span class="badge badge-danger">Admin</span>
+                @else
+                    <span class="badge badge-secondary">User</span>
+                @endif
+            </td>
+        </tr>
         <tbody>
         </tbody>
     </table>

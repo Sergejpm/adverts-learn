@@ -11,6 +11,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Role</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,13 @@
                 <td>{{ $user->id }}</td>
                 <td><a href="{{ route('admin.users.show', $user) }}">{{ $user->name }}</a></td>
                 <td>{{ $user->email }}</td>
+                <td>
+                    @if ($user->isAdmin())
+                        <span class="badge badge-danger">Admin</span>
+                    @else
+                        <span class="badge badge-secondary">User</span>
+                    @endif
+                </td>
             </tr>
         @endforeach
 

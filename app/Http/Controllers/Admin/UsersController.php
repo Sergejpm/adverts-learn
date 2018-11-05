@@ -6,6 +6,7 @@ use App\Entity\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -42,7 +43,12 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $roles = [
+            User::ROLE_USER => 'User',
+            User::ROLE_ADMIN => 'Admin',
+        ];
+
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, User $user)
@@ -50,7 +56,15 @@ class UsersController extends Controller
         $data = $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,id,' . $user->id,
+            'role' => ['required', 'string', Rule::in([
+                User::ROLE_USER,
+                User::ROLE_ADMIN,
+            ])]
         ]);
+
+        if ($request['role'] !== $user->role) {
+            $user->changeRole($request['role']);
+        }
 
         $user->update($data);
 
