@@ -6,9 +6,17 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string $email_verified_at
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
