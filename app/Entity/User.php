@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * @property int $id
  * @property string $name
+ * @property string $last_name
  * @property string $email
  * @property string $password
  * @property string $email_verified_at
@@ -27,7 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role'
+        'name', 'last_name', 'email', 'password', 'role'
     ];
 
     /**
