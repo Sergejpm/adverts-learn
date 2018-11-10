@@ -30,11 +30,6 @@ Breadcrumbs::register('password.reset', function (Crumbs $crumbs) {
     $crumbs->push('Change', route('password.reset'));
 });
 
-Breadcrumbs::register('cabinet.home', function (Crumbs $crumbs) {
-    $crumbs->parent('home');
-    $crumbs->push('Cabinet', route('cabinet.home'));
-});
-
 Breadcrumbs::register('verification.notice', function (Crumbs $crumbs) {
     $crumbs->parent('home');
     $crumbs->push('Verify', route('verification.notice'));
@@ -49,6 +44,25 @@ Breadcrumbs::register('verification.resend', function (Crumbs $crumbs) {
     $crumbs->parent('home');
     $crumbs->push('Verify', route('verification.resend'));
 });
+
+// Cabinet
+
+Breadcrumbs::register('cabinet.home', function (Crumbs $crumbs) {
+    $crumbs->parent('home');
+    $crumbs->push('Cabinet', route('cabinet.home'));
+});
+
+Breadcrumbs::register('cabinet.profile.home', function (Crumbs $crumbs) {
+    $crumbs->parent('cabinet.home');
+    $crumbs->push('Profile', route('cabinet.profile.home'));
+});
+
+Breadcrumbs::register('cabinet.profile.edit', function (Crumbs $crumbs) {
+    $crumbs->parent('cabinet.profile.home');
+    $crumbs->push('Edit', route('cabinet.profile.edit'));
+});
+
+// Admin
 
 Breadcrumbs::register('admin.home', function (Crumbs $crumbs) {
     $crumbs->parent('home');
