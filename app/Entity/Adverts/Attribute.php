@@ -58,4 +58,10 @@ class Attribute extends Model
     {
         return \count($this->variants) > 0;
     }
+
+    public function isNumber(): bool
+    {
+        return $this->isInteger() || $this->isFloat();
+    }
+
 }
