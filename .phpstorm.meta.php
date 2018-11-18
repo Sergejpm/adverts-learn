@@ -5,14 +5,16 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-11-10 14:40:54.
+    * Generated on 2018-11-18 15:39:51.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+        'App\Services\Sms\SmsSender' => \App\Services\Sms\ArraySender::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
@@ -155,7 +157,9 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+        'App\Services\Sms\SmsSender' => \App\Services\Sms\ArraySender::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
@@ -298,7 +302,9 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+        'App\Services\Sms\SmsSender' => \App\Services\Sms\ArraySender::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
@@ -441,7 +447,9 @@ namespace PHPSTORM_META {
     ]));
     override(\App::make(0), map([
         '' => '@',
+        'App\Services\Sms\SmsSender' => \App\Services\Sms\ArraySender::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
@@ -584,7 +592,9 @@ namespace PHPSTORM_META {
     ]));
     override(\App::makeWith(0), map([
         '' => '@',
+        'App\Services\Sms\SmsSender' => \App\Services\Sms\ArraySender::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
@@ -727,7 +737,9 @@ namespace PHPSTORM_META {
     ]));
     override(\app(0), map([
         '' => '@',
+        'App\Services\Sms\SmsSender' => \App\Services\Sms\ArraySender::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
@@ -870,7 +882,9 @@ namespace PHPSTORM_META {
     ]));
     override(\resolve(0), map([
         '' => '@',
+        'App\Services\Sms\SmsSender' => \App\Services\Sms\ArraySender::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'Cviebrock\EloquentSluggable\SluggableObserver' => \Cviebrock\EloquentSluggable\SluggableObserver::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
         'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,

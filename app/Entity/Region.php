@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -18,7 +19,18 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Region extends Model
 {
+    use Sluggable;
+
     protected $fillable = ['name', 'slug', 'parent_id'];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function getPath(): string
     {

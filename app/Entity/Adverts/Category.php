@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity\Adverts;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 
@@ -17,13 +18,25 @@ use Kalnoy\Nestedset\NodeTrait;
  */
 class Category extends Model
 {
-    use NodeTrait;
+    use NodeTrait, Sluggable {
+        Sluggable::replicate insteadof NodeTrait;
+        NodeTrait::replicate as public replicateNodeTrait;
+    }
 
     protected $table = 'advert_categories';
 
     public $timestamps = false;
 
     protected $fillable = ['name', 'slug', 'parent_id'];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function getPath(): string
     {
