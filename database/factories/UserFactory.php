@@ -23,6 +23,7 @@ $factory->define(App\Entity\User::class, function (Faker $faker) {
         'name' => $faker->name,
         'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
+        'phone_auth' => 0,
         'phone' => $faker->unique()->phoneNumber,
         'phone_verified' => $phoneActive,
         'phone_verify_token' => $phoneActive ? null : Str::uuid(),
@@ -30,5 +31,6 @@ $factory->define(App\Entity\User::class, function (Faker $faker) {
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
         'email_verified_at' => now(),
+        'role' => 'user'
     ];
 });
