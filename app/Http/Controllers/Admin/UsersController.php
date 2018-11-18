@@ -70,10 +70,7 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        $roles = [
-            User::ROLE_USER => 'User',
-            User::ROLE_ADMIN => 'Admin',
-        ];
+        $roles = User::rolesList();
 
         return view('admin.users.edit', compact('user', 'roles'));
     }
@@ -83,10 +80,7 @@ class UsersController extends Controller
         $data = $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,id,' . $user->id,
-            'role' => ['required', 'string', Rule::in([
-                User::ROLE_USER,
-                User::ROLE_ADMIN,
-            ])]
+            'role' => ['required', 'string', Rule::in(array_keys(User::rolesList()))]
         ]);
 
         if ($request['role'] !== $user->role) {
