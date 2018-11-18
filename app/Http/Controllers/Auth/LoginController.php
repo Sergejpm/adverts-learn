@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Services\Sms\SmsSender;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Auth\User;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class LoginController extends Controller
 {
@@ -20,6 +26,14 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    private $sms;
+
+    public function __construct(SmsSender $sms)
+    {
+        $this->middleware('guest')->except('logout');
+        $this->sms = $sms;
+    }
+
     /**
      * Where to redirect users after login.
      *
@@ -27,13 +41,57 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/cabinet';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function authenticated(Request $request)
     {
-        $this->middleware('guest')->except('logout');
+        $user = Auth::user();
+        if ($user->isPhoneAuthEnabled()) {
+            Auth::logout();
+            $token = (string)random_int(10000, 99999);
+            $request->session()->put('auth', [
+                'id' => $user->id,
+                'token' => $token,
+                'remember' => $request->filled('remember'),
+            ]);
+
+            $this->sms->send($user->phone, 'Login code: ' . $token);
+
+            return redirect()->route('login.phone');
+        }
+
+        return false;
+    }
+
+    public function phone()
+    {
+        return view('auth.phone');
+    }
+
+    public function verify(Request $request)
+    {
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+            $this->sendLockoutResponse($request);
+        }
+
+        $this->validate($request, [
+            'token' => 'required|string',
+        ]);
+
+        if (!$session = $request->session()->get('auth')) {
+            throw new BadRequestHttpException('Missing token info.');
+        }
+
+        /** @var User $user */
+        $user = User::findOrFail($session['id']);
+        if ($request['token'] === $session['token']) {
+            $request->session()->flush();
+            $this->clearLoginAttempts($request);
+            Auth::login($user, $session['remember']);
+            return redirect()->intended(route('cabinet.home'));
+        }
+
+        $this->incrementLoginAttempts($request);
+
+        throw ValidationException::withMessages(['token' => ['Invalid auth token.']]);
     }
 }

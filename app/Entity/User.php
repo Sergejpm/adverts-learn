@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $last_name
  * @property string $email
  * @property string $phone
+ * @property boolean $phone_auth
  * @property bool $phone_verified
  * @property string $phone_verify_token
  * @property Carbon $phone_verify_token_expire
@@ -48,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'phone_verified' => 'boolean',
         'phone_verify_token_expire' => 'datetime',
+        'phone_auth' => 'boolean',
     ];
 
     public function changeRole($role): void
@@ -66,8 +68,24 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->phone_verified = false;
         $this->phone_verify_token = null;
         $this->phone_verify_token_expire = null;
+        $this->phone_auth = false;
         $this->saveOrFail();
     }
+
+    public function enablePhoneAuth(): void
+    {
+        if (!empty($this->phone) && !$this->isPhoneVerified()) {
+            throw new \DomainException('Phone number is empty.');
+        }
+        $this->phone_auth = true;
+        $this->saveOrFail();
+    }
+    public function disablePhoneAuth(): void
+    {
+        $this->phone_auth = false;
+        $this->saveOrFail();
+    }
+
     public function requestPhoneVerification(Carbon $now): string
     {
         if (empty($this->phone)) {
@@ -105,5 +123,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isPhoneVerified(): bool
     {
         return $this->phone_verified;
+    }
+
+    public function isPhoneAuthEnabled(): bool
+    {
+        return (bool)$this->phone_auth;
     }
 }
