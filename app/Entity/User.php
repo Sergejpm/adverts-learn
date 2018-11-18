@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
 
     public const ROLE_USER = 'user';
+    public const ROLE_MODERATOR = 'moderator';
     public const ROLE_ADMIN = 'admin';
 
     /**
@@ -57,6 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             self::ROLE_USER => 'User',
             self::ROLE_ADMIN => 'Admin',
+            self::ROLE_MODERATOR => 'Moderator',
         ];
     }
 
@@ -136,6 +138,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isPhoneAuthEnabled(): bool
     {
         return (bool)$this->phone_auth;
+    }
+
+    public function isModerator(): bool
+    {
+        return $this->role === self::ROLE_MODERATOR;
     }
 
     public function hasFilledProfile(): bool
