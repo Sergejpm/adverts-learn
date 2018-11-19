@@ -23,7 +23,7 @@ assets-watch:
 	docker-compose exec node yarn run watch
 
 permission:
-	sudo chown ${USER}:${USER} bootstrap/cache -R
-	sudo chown ${USER}:${USER} storage -R
+	sudo chown www-data:www-data bootstrap/cache -R
+	sudo chown www-data:www-data storage -R
 	if [ -d "node_modules" ]; then sudo chown ${USER}:${USER} node_modules -R; fi
 	if [ -d "public/build" ]; then sudo chown ${USER}:${USER} public/build -R; fi
