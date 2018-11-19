@@ -61,3 +61,10 @@ services:
         volumes:
             - ./:/var/www
         tty: true
+    composer:
+        build:
+            context: ./
+            dockerfile: docker/composer.docker
+        volumes:
+            - ./:/var/www
+        tty: true
